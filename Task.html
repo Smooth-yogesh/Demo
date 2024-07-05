@@ -26,5 +26,41 @@
     <footer>
         <p>© 2023 Dynamic Landing Page. All rights reserved.</p>
     </footer>
+    <script>document.addEventListener('DOMContentLoaded', () => {
+    // Function to sanitize user input
+    function sanitizeInput(input) {
+        const tempDiv = document.createElement('div');
+        tempDiv.textContent = input;
+        return tempDiv.innerHTML;
+    }
+
+    // Toggle main menu visibility
+    document.getElementById('learnMoreButton').addEventListener('click', () => {
+        const mainMenu = document.getElementById('mainMenu');
+        mainMenu.classList.toggle('hidden');
+    });
+
+    // Form validation and handling
+    document.getElementById('feedbackForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        const feedbackInput = document.getElementById('feedbackInput').value.trim();
+        
+        if (feedbackInput === '') {
+            alert('Feedback cannot be empty.');
+            return;
+        }
+        
+        const sanitizedFeedback = sanitizeInput(feedbackInput);
+        document.getElementById('feedbackOutput').innerHTML = `Your feedback: ${sanitizedFeedback}`;
+    });
+
+    // Example of dynamic content update
+    setTimeout(() => {
+        const feature = document.getElementById('services');
+        feature.innerHTML += '<p>New service added: Online Consulting.</p>';
+    }, 5000);
+});
+</script>
 </body>
 </html>
